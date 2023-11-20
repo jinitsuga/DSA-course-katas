@@ -8,7 +8,7 @@ export default function bubble_sort(arr: number[]): void {
         }
     }
 }
-
+// El elemento en index j va a cambiar entonces lo asignamos a una const para "guardar" su valor.
 function swapElements(arr: number[], j: number) {
     const elem = arr[j];
     arr[j] = arr[j + 1];
