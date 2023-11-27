@@ -1,4 +1,18 @@
-function qs(arr: number[], lo: number, hi: number): void {}
+function qs(arr: number[], lo: number, hi: number): void {
+    // La condicion para que la recursion termine
+    if (lo === hi) {
+        return;
+    }
+
+    // "Weaksort" para determinar un pivot
+    const pivotIdx = partition(arr, lo, hi);
+
+    // Volvemos a correr la funcion en ambas particiones, del 0 a pivot, y de pivot al final
+    // marcando el 'lo' como el pivot en la segunda parte
+    // esto se repite hasta que se cumpla que lo === hi (osea solo nos queda un elemento)
+    qs(arr, lo, pivotIdx - 1);
+    qs(arr, pivotIdx + 1, hi);
+}
 
 function partition(arr: number[], lo: number, hi: number): number {
     const pivot = arr[hi];
@@ -8,9 +22,22 @@ function partition(arr: number[], lo: number, hi: number): number {
     for (let i = lo; i < hi; i++) {
         if (arr[i] <= pivot) {
             idx++;
-            const tmp = arr[i];
+            const tmp = arr[i]; // 6
+            arr[i] = arr[idx]; // 9
+            arr[idx] = tmp; // 6
         }
     }
+    // [5, 4, 6, 12, 8, 9, 7]
+    // i = 5
+    // idx = 1
+    // tmp =
+    //
+
+    idx++;
+    arr[hi] = arr[idx];
+    arr[idx] = pivot;
+
+    return idx;
 }
 
 export default function quick_sort(arr: number[]): void {
